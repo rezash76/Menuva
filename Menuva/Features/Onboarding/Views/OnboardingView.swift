@@ -37,43 +37,49 @@ struct OnboardingView: View {
                 
                 Spacer()
                 // Language Selector
-                HStack(spacing: 24) {
-                    ForEach(viewModel.languages, id: \.self) { lang in
-                        Button(action: {
-                            viewModel.selectLanguage(lang)
-                        }) {
-                            VStack(spacing: 0) {
-                                Text(lang.flag)
-                                    .font(.largeTitle)
-
-                                Text(lang.displayName)
-                                    .font(.caption).bold()
-                                    .foregroundColor(
-                                        viewModel.selectedLanguage == lang ?
-                                        Color.black :
-                                                .white
-                                    )
-                            }
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 16)
-                            .background(
-                                viewModel.selectedLanguage == lang ?
+                VStack {
+                    Text("Choos your language")
+                        .font(.title2)
+                        .foregroundStyle(.white)
+                        .bold()
+                    HStack(spacing: 24) {
+                        ForEach(viewModel.languages, id: \.self) { lang in
+                            Button(action: {
+                                viewModel.selectLanguage(lang)
+                            }) {
+                                VStack(spacing: 0) {
+                                    Text(lang.flag)
+                                        .font(.largeTitle)
+                                    
+                                    Text(lang.displayName)
+                                        .font(.caption).bold()
+                                        .foregroundColor(
+                                            viewModel.selectedLanguage == lang ?
+                                            Color.black :
+                                                    .white
+                                        )
+                                }
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 16)
+                                .background(
+                                    viewModel.selectedLanguage == lang ?
                                     Color.white.opacity(0.5) :
-                                    nil
-                            )
-                            .foregroundColor(.black)
-                            .cornerRadius(12)
+                                        nil
+                                )
+                                .foregroundColor(.black)
+                                .cornerRadius(12)
+                            }
                         }
                     }
                 }
                 .padding(.bottom, 40)
-
+                
                 
                 SlideButtonView {
                     print("HIII")
                 }
-                    .padding(.bottom, 40)
-                    .frame(maxWidth: 480)
+                .padding(.bottom, 40)
+                .frame(maxWidth: 480)
             }
             .padding(.horizontal, 24)
         }
