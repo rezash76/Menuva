@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct OnboardingView: View {
     @ObservedObject var viewModel = OnboardingManager()
+    @State var isLoading = true
 
     var body: some View {
         ZStack {
@@ -82,8 +81,16 @@ struct OnboardingView: View {
                 .frame(maxWidth: 480)
             }
             .padding(.horizontal, 24)
+            .shimmer(when: isLoading)
+            
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                isLoading = false
+            }
         }
     }
+        
 }
 
 #Preview {
